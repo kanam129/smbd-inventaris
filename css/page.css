@@ -1,0 +1,13 @@
+.tombol-tambah {
+    display: block !important;
+    position: fixed !important;
+    right: 2em;
+    bottom: 2em;
+}
+
+.tombol-cetak {
+    display: block !important;
+    position: fixed !important;
+    right: 2em;
+    bottom: 5em;
+}
