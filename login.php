@@ -17,8 +17,7 @@
     <script src="library/popper.js" ></script>
     <script src="library/bootstrap/js/bootstrap.js"></script>
 </head>
-<body>
-
+<body background="bg3.jpg"></body>
     <div class="container-fluid h-100">
         <div class="row h-100">
             <div class="col-md-12 my-auto mx-auto kontainer">
@@ -31,6 +30,4 @@
             </div>
         </div>
     </div>
-
-</body>
 </html>
