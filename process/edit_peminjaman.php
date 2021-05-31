@@ -7,32 +7,35 @@ if(!isset($_SESSION["user"])){
     header("location:login.php");
 }
 
-if($_POST["tgl_pengembalian"] == "0000-00-00" || $_POST["tgl_pengembalian"] == ""){
-    $tgl_pengembalian = "tgl_pengembalian=NULL";
+if($_POST["tgl_kembali"] == "0000-00-00" || $_POST["tgl_kembali"] == ""){
+    $tgl_kembali = "tgl_kembali=NULL";
 }else{
-    $tgl_pengembalian = "tgl_pengembalian='".$_POST["tgl_pengembalian"]."'";
+    $tgl_kembali = "tgl_kembali='".$_POST["tgl_kembali"]."'";
+}
+
+if($_POST["denda"] == "0" || $_POST["denda"] == ""){
+    $denda = "denda=NULL";
+}else{
+    $denda = "denda='".$_POST["denda"]."'";
 }
 
 $id = $_POST["id_peminjaman"];
-$tgl_peminjaman = $_POST["tgl_peminjaman"];
-$nama_peminjam = $_POST["nama_peminjam"];
-$no_tlp_peminjam = $_POST["no_tlp_peminjam"];
-$alamat_peminjam = $_POST["alamat_peminjam"];
+$tgl_peminjaman = $_POST["tgl_pinjam"];
 $id_barang = $_POST["id_barang"];
-$banyak_yang_dipinjam = $_POST["banyak_yang_dipinjam"];
-$username_pengguna = $_SESSION["user"];
+$anggota_nim = $_POST["nim"];
 
-$update = mysqli_query($conn, "update peminjaman set tgl_peminjaman='$tgl_peminjaman', nama_peminjam='$nama_peminjam', no_tlp_peminjam='$no_tlp_peminjam', alamat_peminjam='$alamat_peminjam', id_barang=$id_barang, banyak_yang_dipinjam=$banyak_yang_dipinjam, username_pengguna='$username_pengguna', $tgl_pengembalian where id_peminjaman=$id");
+$query = "update peminjaman set tgl_peminjaman='$tgl_peminjaman', barang_id_barang=$id_barang, anggota_nim='$anggota_nim', $denda, $tgl_kembali where id_peminjaman=$id";
+$update = mysqli_query($conn, $query);
 
 if($update){
     ?>
     <script>
-        alert("Edit data peminjaman berhasil <?php echo $_POST["tgl_pengembalian"] ?>");
+        alert("Edit data peminjaman berhasil");
         document.location = "../index.php?page=peminjaman";
     </script>
     <?php
 }else{
-    echo "error";
+    echo "error\n$query";
 }
 
 ?>

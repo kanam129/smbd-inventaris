@@ -55,7 +55,7 @@ if(!isset($_GET["page"])){
                 </li>
                 
                 <?php 
-                    if($_SESSION["hak_akses"] == "Super Admin"){
+                    if($_SESSION["level_petugas"] == "Super Admin"){
                         ?>
                         <li class="nav-item <?php if($_GET['page']=='pengguna'){echo 'active';} ?>">
                             <a class="nav-link <?php if($_GET['page']=='pengguna'){echo 'nav-active';} ?>" href="index.php?page=pengguna">Pengguna</a>
@@ -86,7 +86,7 @@ if(!isset($_GET["page"])){
                     <div class="h1"><i class="fas fa-user    "></i></div>
                     <div>
                         Username : <?php echo $_SESSION["user"] ?><br>
-                        Nama : <?php echo $_SESSION["nama_pengguna"] ?>
+                        Nama : <?php echo $_SESSION["nama_petugas"] ?>
                     </div>
                 </div>
                 <div class="modal-footer">

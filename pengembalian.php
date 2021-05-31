@@ -7,53 +7,43 @@
                             <th>ID</th>
                             <th>Tanggal Peminjaman</th>
                             <th>Tanggal Pengembalian</th>
-                            <th>Nama Peminjam</th>
-                            <th>No Tlp</th>
-                            <th>Alamat</th>
+                            <th>Denda</th>
+                            <th>Petugas</th>
                             <th>Barang</th>
-                            <th>Banyak Barang</th>
-                            <th>Yang Melayani</th>
+                            <th>Nama Peminjam</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
 
-                        $select = mysqli_query($conn, "select * from peminjaman where tgl_pengembalian is null and waktu_peminjaman < NOW() - INTERVAL 1 DAY");
+                        $select = mysqli_query($conn, "select * from viewpengembalian where tgl_kembali is null and tgl_peminjaman < NOW() - INTERVAL 1 DAY");
                         while($data = mysqli_fetch_array($select)){
-                            $selectBarang = mysqli_query($conn, "select nama_barang from barang where id_barang=".$data["id_barang"]);
-                            $nama_barang = mysqli_fetch_array($selectBarang);
                             ?>
                             <tr class="bg-danger text-white">
                                 <td><?php echo $data["id_peminjaman"] ?></td>
                                 <td><?php echo $data["tgl_peminjaman"] ?></td>
-                                <td><?php echo $data["tgl_pengembalian"] ?></td>
-                                <td><?php echo $data["nama_peminjam"] ?></td>
-                                <td><?php echo $data["no_tlp_peminjam"] ?></td>
-                                <td><?php echo $data["alamat_peminjam"] ?></td>
-                                <td><?php echo $data["id_barang"]."-".$nama_barang[0] ?></td>
-                                <td><?php echo $data["banyak_yang_dipinjam"] ?></td>
-                                <td><?php echo $data["username_pengguna"] ?></td>
+                                <td><?php echo $data["tgl_kembali"] ?></td>
+                                <td><?php echo $data["denda"] ?></td>
+                                <td><?php echo $data["nama_petugas"] ?></td>
+                                <td><?php echo $data["nama_barang"] ?></td>
+                                <td><?php echo $data["nama_anggota"] ?></td>
                                 <td><a href="#form-edit" class="text-white" data-toggle="modal" onclick="edit(<?php echo $data['id_peminjaman'] ?>)"><i class="fas fa-edit    "></i></a></td>
                             </tr>
                             <?php
                         }
 
-                        $select = mysqli_query($conn, "select * from peminjaman where tgl_pengembalian is null and waktu_peminjaman > NOW() - INTERVAL 1 DAY");
+                        $select = mysqli_query($conn, "select * from viewpengembalian where tgl_kembali is null and tgl_peminjaman > NOW() - INTERVAL 1 DAY");
                         while($data = mysqli_fetch_array($select)){
-                            $selectBarang = mysqli_query($conn, "select nama_barang from barang where id_barang=".$data["id_barang"]);
-                            $nama_barang = mysqli_fetch_array($selectBarang);
                             ?>
                             <tr>
                                 <td><?php echo $data["id_peminjaman"] ?></td>
                                 <td><?php echo $data["tgl_peminjaman"] ?></td>
-                                <td><?php echo $data["tgl_pengembalian"] ?></td>
-                                <td><?php echo $data["nama_peminjam"] ?></td>
-                                <td><?php echo $data["no_tlp_peminjam"] ?></td>
-                                <td><?php echo $data["alamat_peminjam"] ?></td>
-                                <td><?php echo $data["id_barang"]."-".$nama_barang[0] ?></td>
-                                <td><?php echo $data["banyak_yang_dipinjam"] ?></td>
-                                <td><?php echo $data["username_pengguna"] ?></td>
+                                <td><?php echo $data["tgl_kembali"] ?></td>
+                                <td><?php echo $data["denda"] ?></td>
+                                <td><?php echo $data["nama_petugas"] ?></td>
+                                <td><?php echo $data["nama_barang"] ?></td>
+                                <td><?php echo $data["nama_anggota"] ?></td>
                                 <td><a href="#form-edit" data-toggle="modal" onclick="edit(<?php echo $data['id_peminjaman'] ?>)"><i class="fas fa-edit    "></i></a></td>
                             </tr>
                             <?php

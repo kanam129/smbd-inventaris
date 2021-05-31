@@ -3,10 +3,10 @@
 include("../system/connection.php");
 session_start();
 
-$username = $_POST["username_pengguna"];
-$password = $_POST["password_pengguna"];
+$username = $_POST["username_petugas"];
+$password = $_POST["password_petugas"];
 
-$select = mysqli_query($conn, "select * from pengguna where binary username_pengguna = '$username' and binary password_pengguna = '$password'");
+$select = mysqli_query($conn, "select * from petugas where binary username_petugas = '$username' and binary password_petugas = '$password'");
 $num_row = mysqli_num_rows($select);
 
 if($num_row < 1){
@@ -18,13 +18,15 @@ if($num_row < 1){
     <?php
 }else{
     while($data = mysqli_fetch_array($select)){
-        $user = $data["username_pengguna"];
-        $nama_pengguna = $data["nama_pengguna"];
-        $hak_akses = $data["hak_akses_pengguna"];
+        $user = $data["username_petugas"];
+        $nama_pengguna = $data["nama_petugas"];
+        $level_petugas = $data["level_petugas"];
+        $id_petugas = $data["id_petugas"];
     }
     $_SESSION["user"] = $user;
-    $_SESSION["hak_akses"] = $hak_akses;
-    $_SESSION["nama_pengguna"] = $nama_pengguna;
+    $_SESSION["level_petugas"] = $level_petugas;
+    $_SESSION["nama_petugas"] = $nama_petugas;
+    $_SESSION["id_petugas"] = $id_petugas;
     header("location:../index.php");
 }
 

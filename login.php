@@ -24,8 +24,8 @@
             <div class="col-md-12 my-auto mx-auto kontainer">
                 <h2 class="text-center text-primary mb-3">Login</h2>
                 <form action="process/login.php" method="post">
-                    <input type="text" name="username_pengguna" class="form-control my-2" placeholder="Username" required>
-                    <input type="password" name="password_pengguna" class="form-control my-2" placeholder="Password" required>
+                    <input type="text" name="username_petugas" class="form-control my-2" placeholder="Username" required>
+                    <input type="password" name="password_petugas" class="form-control my-2" placeholder="Password" required>
                     <input type="submit" value="Login" class="btn btn-outline-primary my-2 w-100">
                 </form>
             </div>

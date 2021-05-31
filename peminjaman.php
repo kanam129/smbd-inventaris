@@ -6,46 +6,26 @@
                         <tr>
                             <th>ID</th>
                             <th>Tanggal Peminjaman</th>
-                            <th>Tanggal Pengembalian</th>
-                            <th>Nama Peminjam</th>
-                            <th>No Tlp</th>
-                            <th>Alamat</th>
+                            <th>Petugas</th>
                             <th>Barang</th>
-                            <th>Banyak Barang</th>
-                            <th>Yang Melayani</th>
-                            <?php 
-                            $hak_akses = $_SESSION["hak_akses"];
-                            if($hak_akses=="Super Admin"){
-                                ?>
-                                <th colspan="2">Aksi</th>
-                                <?php
-                            } ?>
+                            <th>Nama Peminjam</th>
+                            <th colspan="2">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         
-                        $select = mysqli_query($conn, "select * from peminjaman");
+                        $select = mysqli_query($conn, "select * from viewpeminjaman");
                         while($data = mysqli_fetch_array($select)){
-                            $selectBarang = mysqli_query($conn, "select nama_barang from barang where id_barang=".$data["id_barang"]);
-                            $nama_barang = mysqli_fetch_array($selectBarang);
                             ?>
                             <tr>
                                 <td><?php echo $data["id_peminjaman"] ?></td>
                                 <td><?php echo $data["tgl_peminjaman"] ?></td>
-                                <td><?php echo $data["tgl_pengembalian"] ?></td>
-                                <td><?php echo $data["nama_peminjam"] ?></td>
-                                <td><?php echo $data["no_tlp_peminjam"] ?></td>
-                                <td><?php echo $data["alamat_peminjam"] ?></td>
-                                <td><?php echo $data["id_barang"]."-".$nama_barang[0] ?></td>
-                                <td><?php echo $data["banyak_yang_dipinjam"] ?></td>
-                                <td><?php echo $data["username_pengguna"] ?></td>
-                                <?php if($hak_akses=="Super Admin"){
-                                    ?>
-                                    <td><a href="#form-edit" data-toggle="modal" onclick="edit(<?php echo $data['id_peminjaman'] ?>)"><i class="fas fa-pencil-alt"></i></a></td>
-                                    <td><a href="#form-hapus" data-toggle="modal" onclick="hapus(<?php echo $data['id_peminjaman'] ?>)" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
-                                    <?php
-                                } ?>
+                                <td><?php echo $data["nama_petugas"] ?></td>
+                                <td><?php echo $data["nama_barang"] ?></td>
+                                <td><?php echo $data["nama_anggota"] ?></td>
+                                <td><a href="#form-edit" data-toggle="modal" onclick="edit(<?php echo $data['id_peminjaman'] ?>)"><i class="fas fa-pencil-alt"></i></a></td>
+                                <td><a href="#form-hapus" data-toggle="modal" onclick="hapus(<?php echo $data['id_peminjaman'] ?>)" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             <?php
                         }
@@ -71,26 +51,58 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
+
                 <form action="process/tambah_peminjaman.php" method="post">
                     <div class="modal-body">
-                        <input type="text" name="nama_peminjam" class="form-control mb-3" placeholder="Nama Peminjam" required>
-                        <input type="tel" name="no_tlp_peminjam" class="form-control mb-3" placeholder="Nomer Telepon" required>
-                        <input type="text" name="alamat_peminjam" class="form-control mb-3" placeholder="Alamat" required>
-                        <select name="id_barang" class="form-control mb-3" id="id_barang" required onchange="banyak_pinjam(this.value)">
-                            <option value="" disabled selected>Pilih Barang</option>
-                            <?php 
-                            $select = mysqli_query($conn, "select * from barang");
-                            while($data = mysqli_fetch_array($select)){
-                                ?>
-                                <option value="<?php echo $data['id_barang'] ?>"><?php echo $data['id_barang'] ?> - <?php echo $data['nama_barang'] ?></option>
-                                <script>
-                                    <?php echo "var id_".$data['id_barang']." = ".((int)$data["stok_barang"]-(int)$data["dipinjam"]) ?>
-                                </script>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                        <div id="banyak_yang_dipinjam">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group mb-2">
+                                        <label for="nim" class="w-100">NIM</label>
+                                        <input type="text" class="form-control" name="nim" id="nim" placeholder="NIM" aria-label="NIM" required>
+                                        <span class="input-group-btn ml-2">
+                                            <button class="btn btn-primary text-light" type="button" aria-label="Cari" onclick="get_anggota('#get_nim', '#nim')"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                        </span>
+                                    </div>
+                                    <div id="get_nim">
+                                        <div class="form-group">
+                                            <label for="nama_anggota">Nama</label>
+                                            <input type="text" class="form-control" name="nama_anggota" id="nama_anggota" placeholder="Nama" readonly required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tgl_lahir_anggota">Tgl Lahir</label>
+                                            <input type="date" class="form-control" name="tgl_lahir_anggota" id="tgl_lahir_anggota" placeholder="Tgl Lahir" readonly required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="alamat_anggota">Alamat</label>
+                                            <input type="text" class="form-control" name="alamat_anggota" id="alamat_anggota" aria-describedby="helpId" placeholder="Alamat" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group mb-2">
+                                        <label for="id_barang" class="w-100">ID Barang</label>
+                                        <input type="text" class="form-control" name="id_barang" id="id_barang" placeholder="ID Barang" required>
+                                        <span class="input-group-btn ml-2">
+                                            <button class="btn btn-primary text-light" type="button" aria-label="Cari" onclick="get_barang('#get_barang', '#id_barang')"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                        </span>
+                                    </div>
+                                    <div id="get_barang">
+                                        <div class="form-group">
+                                            <label for="nama_barang">Nama Barang</label>
+                                            <input type="text" class="form-control" name="nama_barang" id="nama_barang" placeholder="Nama Barang" readonly required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="merk_barang">Merk</label>
+                                            <input type="text" class="form-control" name="merk_barang" id="merk_barang" placeholder="Merk" readonly required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kondisi_barang">Kondisi</label>
+                                            <input type="text" class="form-control" name="kondisi_barang" id="kondisi_barang" aria-describedby="helpId" placeholder="Kondisi" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -152,8 +164,22 @@
     </div>
 
     <script>
+        function get_anggota(target, get_id) {  
+            var id_temp = $(get_id).val();
+            $(target).load("process/ajax_get_anggota.php", {id:id_temp}, function (response, status, request) {
+                this; // dom element
+            });
+        }
+        
+        function get_barang(target, get_id) {  
+            var id_temp = $(get_id).val();
+            $(target).load("process/ajax_get_barang.php", {id:id_temp}, function (response, status, request) {
+                this; // dom element
+            });
+        }
+
         function edit(id_temp) {
-            $("#body-edit").load("process/edit_peminjaman_ajax.php", {id:id_temp, hak_akses:"<?php echo $_SESSION['hak_akses'] ?>"}, function (response, status, request) {
+            $("#body-edit").load("process/edit_peminjaman_ajax.php", {id:id_temp}, function (response, status, request) {
                 this; // dom element
             });
         }

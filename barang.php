@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-lg-5">
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-striped table-inverse w-100 text-center">
@@ -7,7 +7,9 @@
                             <th>ID</th>
                             <th>Nama</th>
                             <th>Merk</th>
-                            <th>Stok</th>
+                            <th>Jumlah</th>
+                            <th>Kondisi</th>
+                            <th>Tgl Masuk</th>
                             <th colspan="2">Aksi</th>
                         </tr>
                     </thead>
@@ -21,7 +23,9 @@
                                 <td><?php echo $data["id_barang"] ?></td>
                                 <td><?php echo $data["nama_barang"] ?></td>
                                 <td><?php echo $data["merk_barang"] ?></td>
-                                <td><?php echo $data["stok_barang"] ?></td>
+                                <td><?php echo $data["jumlah_barang"] ?></td>
+                                <td><?php echo $data["kondisi_barang"] ?></td>
+                                <td><?php echo $data["tgl_barang_masuk"] ?></td>
                                 <td><a href="#form-edit" data-toggle="modal" onclick="edit(<?php echo $data['id_barang'] ?>)"><i class="fas fa-pencil-alt"></i></a></td>
                                 <td><a href="#form-hapus" data-toggle="modal" onclick="hapus(<?php echo $data['id_barang'] ?>)" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
@@ -52,9 +56,26 @@
                 </div>
                 <form action="process/tambah_barang.php" method="post">
                     <div class="modal-body">
-                        <input type="text" name="nama_barang" class="form-control mb-3" placeholder="Nama Barang" required>
-                        <input type="text" name="merk_barang" class="form-control mb-3" placeholder="Merk Barang" required>
-                        <input type="number" name="stok_barang" class="form-control mb-3" placeholder="Stok Barang" min="1" required>
+                        Nama
+                        <input type="text" name="nama_barang" class="form-control mb-3 mt-2" placeholder="Nama Barang" required>
+
+                        Merk
+                        <input type="text" name="merk_barang" class="form-control mb-3 mt-2" placeholder="Merk Barang" required>
+
+                        Jumlah
+                        <input type="number" name="jumlah_barang" class="form-control mb-3 mt-2" placeholder="Jumlah Barang" min="1" required>
+
+                        <div class="form-group">
+                          <label for="kondisi">Kondisi</label>
+                          <select class="form-control" name="kondisi_barang" id="kondisi" required>
+                            <option selected disabled>--Pilih--</option>
+                            <option value="Baik">Baik</option>
+                            <option value="Rusak">Rusak</option>
+                          </select>
+                        </div>
+
+                        Tgl Masuk
+                        <input type="date" name="tgl_barang_masuk" class="form-control mb-3 mt-2" placeholder="Tgl Masuk" min="1" value="<?php echo date('Y-m-d'); ?>" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

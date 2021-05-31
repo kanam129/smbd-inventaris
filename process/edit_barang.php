@@ -11,9 +11,11 @@ if(!isset($_SESSION["user"])){
 $id_barang = $_POST["id_barang"];
 $nama_barang = $_POST["nama_barang"];
 $merk_barang = $_POST["merk_barang"];
-$stok_barang = $_POST["stok_barang"];
+$jumlah_barang = $_POST["jumlah_barang"];
+$kondisi_barang = $_POST["kondisi_barang"];
+$tgl_barang_masuk = $_POST["tgl_barang_masuk"];
 
-$update = mysqli_query($conn, "update barang set nama_barang='$nama_barang', merk_barang='$merk_barang', stok_barang=$stok_barang where id_barang=$id_barang");
+$update = mysqli_query($conn, "update barang set nama_barang='$nama_barang', merk_barang='$merk_barang', jumlah_barang=$jumlah_barang, kondisi_barang='$kondisi_barang', tgl_barang_masuk='$tgl_barang_masuk' where id_barang=$id_barang");
 
 if($update){
     ?>

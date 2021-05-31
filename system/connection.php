@@ -1,9 +1,9 @@
 <?php
 
-$conn = mysqli_connect("localhost:8111", "root", "", "rpl_inventaris_lab");
+$conn = mysqli_connect("localhost:8111", "root", "", "projek_smbd_inventaris");
 
 if(mysqli_connect_errno()){
-    echo "Connection Error";
+    echo mysqli_connect_errno();
 }
 
 ?>
