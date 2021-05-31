@@ -8,9 +8,9 @@ if(!isset($_SESSION["user"])){
 }
 
 $id = $_POST["id"];
-$tgl_pengembalian = date("Y-m-d", time());
+$tgl_kembali = date("Y/m/d", time());
 
-$update = mysqli_query($conn, "update peminjaman set tgl_pengembalian='$tgl_pengembalian' where id_peminjaman=$id");
+$update = mysqli_query($conn, "update peminjaman set tgl_kembali='$tgl_kembali', denda = cekDenda($id, '$tgl_kembali') where id_peminjaman=$id");
 
 if($update){
     ?>

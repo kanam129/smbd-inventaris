@@ -44,7 +44,23 @@
                                 <td><?php echo $data["nama_petugas"] ?></td>
                                 <td><?php echo $data["nama_barang"] ?></td>
                                 <td><?php echo $data["nama_anggota"] ?></td>
-                                <td><a href="#form-edit" data-toggle="modal" onclick="edit(<?php echo $data['id_peminjaman'] ?>)"><i class="fas fa-edit    "></i></a></td>
+                                <td><a href="#form-edit" data-toggle="modal" onclick="edit(<?php echo $data['id_peminjaman']; ?>)"><i class="fas fa-edit    "></i></a></td>
+                            </tr>
+                            <?php
+                        }
+
+                        $select = mysqli_query($conn, "select * from viewpengembalian where tgl_kembali is not null");
+                        while($data = mysqli_fetch_array($select)){
+                            ?>
+                            <tr class="bg-success text-light">
+                                <td><?php echo $data["id_peminjaman"] ?></td>
+                                <td><?php echo $data["tgl_peminjaman"] ?></td>
+                                <td><?php echo $data["tgl_kembali"] ?></td>
+                                <td><?php echo $data["denda"] ?></td>
+                                <td><?php echo $data["nama_petugas"] ?></td>
+                                <td><?php echo $data["nama_barang"] ?></td>
+                                <td><?php echo $data["nama_anggota"] ?></td>
+                                <td>Sudah Dikembalikan</td>
                             </tr>
                             <?php
                         }
