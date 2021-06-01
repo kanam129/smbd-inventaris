@@ -12,7 +12,7 @@ $id_barang = $_POST["id_barang"];
 $nim = $_POST["nim"];
 $id_petugas = $_SESSION["id_petugas"];
 
-$insert = mysqli_query($conn, "insert into peminjaman values (null, '$tgl_peminjaman', null, null, $id_petugas, $id_barang, $nim)");
+$insert = mysqli_query($conn, "insert into peminjaman values (null, '$tgl_peminjaman', null, 0, $id_petugas, $id_barang, $nim)");
 
 if($insert){
     ?>
@@ -22,7 +22,7 @@ if($insert){
     </script>
     <?php
 }else{
-    echo "error";
+    echo "Error";
 }
 
 ?>

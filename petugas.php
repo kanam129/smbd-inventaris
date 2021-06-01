@@ -4,11 +4,14 @@
                 <table class="table table-striped table-inverse w-100 text-center">
                     <thead class="thead-inverse">
                         <tr>
-                            <th>Username</th>
-                            <th>Hak Akses</th>
+                            <th>ID</th>
                             <th>Nama</th>
+                            <th>Gender</th>
+                            <th>Tgl Lahir</th>
                             <th>No Telp</th>
                             <th>Alamat</th>
+                            <th>Username</th>
+                            <th>Level</th>
                             <th colspan="2">Aksi</th>
                         </tr>
                     </thead>
@@ -18,20 +21,23 @@
                         </script>
                         <?php
 
-                        $select = mysqli_query($conn, "select * from pengguna");
+                        $select = mysqli_query($conn, "select * from petugas");
                         while($data = mysqli_fetch_array($select)){
                             ?>
                             <tr>
                                 <script>
-                                    usernames.push("<?php echo $data['username_pengguna'] ?>");
+                                    usernames.push("<?php echo $data['username_petugas'] ?>");
                                 </script>
-                                <td><?php echo $data["username_pengguna"] ?></td>
-                                <td><?php echo $data["hak_akses_pengguna"] ?></td>
-                                <td><?php echo $data["nama_pengguna"] ?></td>
-                                <td><?php echo $data["no_tlp_pengguna"] ?></td>
-                                <td><?php echo $data["alamat_pengguna"] ?></td>
-                                <td><a href="#form-edit" data-toggle="modal" onclick="edit('<?php echo $data['username_pengguna'] ?>')"><i class="fas fa-pencil-alt"></i></a></td>
-                                <td><a href="#form-hapus" data-toggle="modal" onclick="hapus('<?php echo $data['username_pengguna'] ?>')" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
+                                <td><?php echo $data["id_petugas"] ?></td>
+                                <td><?php echo $data["nama_petugas"] ?></td>
+                                <td><?php echo $data["jenis_kelamin_petugas"] ?></td>
+                                <td><?php echo $data["tgl_lahir_petugas"] ?></td>
+                                <td><?php echo $data["no_tlp_petugas"] ?></td>
+                                <td><?php echo $data["alamat_petugas"] ?></td>
+                                <td><?php echo $data["username_petugas"] ?></td>
+                                <td><?php echo $data["level_petugas"] ?></td>
+                                <td><a href="#form-edit" data-toggle="modal" onclick="edit('<?php echo $data['id_petugas'] ?>')"><i class="fas fa-pencil-alt"></i></a></td>
+                                <td><a href="#form-hapus" data-toggle="modal" onclick="hapus('<?php echo $data['id_petugas'] ?>')" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             <?php
                         }
@@ -45,7 +51,7 @@
 
     <a href="#form-tambah" class="btn btn-primary rounded-circle tombol-tambah" data-toggle="modal"><i class="fas fa-plus"></i></a>
 
-    <a href="process/print_pengguna.php" class="btn btn-secondary rounded-circle tombol-cetak"><i class="fas fa-print"></i></a>
+    <a href="process/print_petugas.php" class="btn btn-secondary rounded-circle tombol-cetak"><i class="fas fa-print"></i></a>
 
     
     <!-- Modal Tambah -->
@@ -58,18 +64,55 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
-                <form action="process/tambah_pengguna.php" method="post">
+                <form action="process/tambah_petugas.php" method="post">
                     <div class="modal-body" id="tambah">
-                        <input type="text" id="username_pengguna" name="username_pengguna" class="form-control mb-3" placeholder="Username" required onblur="checkUsername(this)" autocomplete="off">
-                        <input type="text" id="password_pengguna" name="password_pengguna" class="form-control mb-3" placeholder="Password" required>
-                        <select id="hak_akses_pengguna" name="hak_akses_pengguna" class="form-control mb-3" required>
-                            <option value="" disabled selected>Pilih</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Super Admin">Super Admin</option>
-                        </select>
-                        <input type="text" id="nama_pengguna" name="nama_pengguna" class="form-control mb-3" placeholder="Nama" required>
-                        <input type="telp" id="no_tlp_pengguna" name="no_tlp_pengguna" class="form-control mb-3" placeholder="No Telp" required>
-                        <input type="text" id="alamat_pengguna" name="alamat_pengguna" class="form-control mb-3" placeholder="Alamat" required>
+                        <div class="form-group">
+                          <label for="nama_petugas">Nama</label>
+                          <input type="text" class="form-control" name="nama_petugas" id="nama_petugas" aria-describedby="helpId" placeholder="Nama">
+                        </div>
+                        <div class="w-100 mb-2">
+                            Jenis Kelamin
+                        </div>
+                        <div class="form-check form-check-inline mb-3">
+                            <label class="form-check-label mr-3">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin_petugas" id="jenis_kelamin_petugas" value="L"> Laki-laki
+                            </label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin_petugas" id="jenis_kelamin_petugas2" value="P"> Perempuan
+                            </label>
+                        </div>
+                        <div class="form-group">
+                          <label for="tgl_lahir_petugas">Tgl Lahir</label>
+                          <input type="date"
+                            class="form-control" name="tgl_lahir_petugas" id="tgl_lahir_petugas" aria-describedby="helpId" placeholder="Tanggal Lahir">
+                        </div>
+                        <div class="form-group">
+                          <label for="no_tlp_petugas">No Tlp</label>
+                          <input type="tel"
+                            class="form-control" name="no_tlp_petugas" id="no_tlp_petugas" aria-describedby="helpId" placeholder="08xxxxxxxxxx">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat_petugas">Alamat</label>
+                            <textarea class="form-control" name="alamat_petugas" id="alamat_petugas" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="username_petugas">Username</label>
+                          <input type="text"
+                            class="form-control" name="username_petugas" id="username_petugas" aria-describedby="usernameHelpText" placeholder="Username" required onblur="checkUsername(this)" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                          <label for="password_petugas">Password</label>
+                          <input type="password" class="form-control" name="password_petugas" id="password_petugas">
+                        </div>
+                        <div class="form-group">
+                          <label for="level_petugas">Level</label>
+                          <select class="form-control" name="level_petugas" id="level_petugas">
+                            <option selected disabled>--Pilih--</option>
+                            <option>Admin</option>
+                            <option>Super Admin</option>
+                          </select>
+                        </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -90,7 +133,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
-                <form action="process/edit_pengguna.php" method="post" id="form-edit">
+                <form action="process/edit_petugas.php" method="post" id="form-edit">
                     <div class="modal-body" id="body-edit">
                         
                     </div>
@@ -113,7 +156,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
-                <form action="process/hapus_pengguna.php" method="post" id="form-hapus">
+                <form action="process/hapus_petugas.php" method="post" id="form-hapus">
                     <div class="modal-body" id="body-edit">
                         <div class="form-check form-check-inline mb-3 ml-2">
                             <input type="hidden" name="id" id="id">
@@ -131,7 +174,7 @@
 
     <script>
         function edit(id_temp) {
-            $("#body-edit").load("process/edit_pengguna_ajax.php", {id:id_temp}, function (response, status, request) {
+            $("#body-edit").load("process/edit_petugas_ajax.php", {id:id_temp}, function (response, status, request) {
                 this; // dom element
             });
         }

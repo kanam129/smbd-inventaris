@@ -57,8 +57,8 @@ if(!isset($_GET["page"])){
                 <?php 
                     if($_SESSION["level_petugas"] == "Super Admin"){
                         ?>
-                        <li class="nav-item <?php if($_GET['page']=='pengguna'){echo 'active';} ?>">
-                            <a class="nav-link <?php if($_GET['page']=='pengguna'){echo 'nav-active';} ?>" href="index.php?page=pengguna">Pengguna</a>
+                        <li class="nav-item <?php if($_GET['page']=='petugas'){echo 'active';} ?>">
+                            <a class="nav-link <?php if($_GET['page']=='petugas'){echo 'nav-active';} ?>" href="index.php?page=petugas">Petugas</a>
                         </li>
                         <?php
                     }
