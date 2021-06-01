@@ -63,6 +63,9 @@ if(!isset($_GET["page"])){
                         <?php
                     }
                 ?>
+                <li class="nav-item <?php if($_GET['page']=='log'){echo 'active';} ?>">
+                    <a class="nav-link <?php if($_GET['page']=='log'){echo 'nav-active';} ?>" href="index.php?page=log">Log</a>
+                </li>
             </ul>
             <a class="btn btn-light" href="#modal-user" data-toggle="modal" role="button"><i class="fas fa-user mr-1"></i> <?php echo $_SESSION["user"] ?></a>
         </div>
