@@ -53,6 +53,9 @@ if(!isset($_GET["page"])){
                 <li class="nav-item <?php if($_GET['page']=='pengembalian'){echo 'active';} ?>">
                     <a class="nav-link <?php if($_GET['page']=='pengembalian'){echo 'nav-active';} ?>" href="index.php?page=pengembalian">Pengembalian</a>
                 </li>
+                <li class="nav-item <?php if($_GET['page']=='anggota'){echo 'active';} ?>">
+                    <a class="nav-link <?php if($_GET['page']=='anggota'){echo 'nav-active';} ?>" href="index.php?page=anggota">Anggota</a>
+                </li>
                 
                 <?php 
                     if($_SESSION["level_petugas"] == "Super Admin"){

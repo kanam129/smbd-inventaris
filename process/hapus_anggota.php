@@ -8,9 +8,9 @@ if(!isset($_SESSION["user"])){
 }
 
 
-$nim = $_POST["id"];
+$nim = $_POST["nim"];
 
-$delete = mysqli_query($conn, "delete from anggota where nim = '$nim'");
+$delete = mysqli_query($conn, "delete from anggota where nim = $nim");
 
 if($delete){
     ?>
