@@ -13,8 +13,9 @@ $tgl_kembali = date("Y/m/d", time());
 
 $update = mysqli_multi_query($conn, "
     START TRANSACTION;
-    update peminjaman set tgl_kembali='$tgl_kembali', denda = cekDenda($id, '$tgl_kembali') where id_peminjaman=$id
-    pengembalian($id);
+    update peminjaman set tgl_kembali='$tgl_kembali', denda = cekDenda($id, '$tgl_kembali') where id_peminjaman=$id;
+    set @idBarang = (select barang_id_barang from peminjaman where id_peminjaman = $id);
+    call pengembalian(@idBarang);
     COMMIT;
 ");
 

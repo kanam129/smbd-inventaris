@@ -62,8 +62,7 @@
                     Nama anggota
                     <input type="text" name="nama_anggota" class="form-control mb-3 mt-2" placeholder="Nama Anggota" required>
 
-                    </div>
-                        <div class="w-100 mb-2">
+                    <div class="w-100 mb-2">
                             Jenis Kelamin
                         </div>
                         <div class="form-check form-check-inline mb-3">
@@ -88,6 +87,7 @@
                             <label for="alamat_anggota">Alamat</label>
                             <textarea class="form-control" name="alamat_anggota" id="alamat_anggota" rows="2"></textarea>
                         </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <input type="submit" value="Tambah" class="btn btn-primary">
