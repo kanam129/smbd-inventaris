@@ -42,7 +42,6 @@ if(!isset($_SESSION["user"])){
                             <th>Jenis Kelamin</th>
                             <th>Tanggal Lahir</th>
                             <th>No Tlp</th>
-                            <th>Tgl Masuk</th>
                             <th colspan="2">Aksi</th>
                         </tr>
                     </thead>

@@ -3,6 +3,10 @@
 session_start();
 include("../system/connection.php");
 
+if(!isset($_SESSION["user"])){
+    header("location:login.php");
+}
+
 $nim = $_POST["nim"];
 $nama_anggota = $_POST["nama_anggota"];
 $jenis_kelamin_anggota = $_POST["jenis_kelamin_anggota"];
