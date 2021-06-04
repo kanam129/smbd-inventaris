@@ -1,11 +1,7 @@
 <?php
 
-include("../system/connection.php");
 session_start();
-
-if(!isset($_SESSION["nim"])){
-    header("location:login.php");
-}
+include("../system/connection.php");
 
 $nim = $_POST["nim"];
 $nama_anggota = $_POST["nama_anggota"];

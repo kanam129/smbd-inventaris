@@ -1,9 +1,10 @@
 <?php
 
+session_start();
 include("../system/connection.php");
-$id = $_POST["nim"];
+$id = $_POST["id"];
 
-$select = mysqli_query($conn, "select * from anggota where nim=$nim");
+$select = mysqli_query($conn, "select * from anggota where nim='$nim'");
 
 while($data = mysqli_fetch_array($select)){
     $nim = $data["nim"];

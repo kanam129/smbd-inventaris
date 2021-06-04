@@ -1,7 +1,7 @@
 <?php
 
-include("../system/connection.php");
 session_start();
+include("../system/connection.php");
 
 if(!isset($_SESSION["user"])){
     header("location:login.php");
@@ -9,8 +9,9 @@ if(!isset($_SESSION["user"])){
 
 
 $id = $_POST["id"];
+$username = $_POST["username"];
 
-$delete = mysqli_query($conn, "delete from petugas where id_petugas = $id");
+$delete = mysqli_multi_query($conn, "delete from petugas where id_petugas = $id; DROP USER '$username'");
 
 if($delete){
     ?>
@@ -20,7 +21,7 @@ if($delete){
     </script>
     <?php
 }else{
-    echo "error";
+    echo mysqli_error($conn);
 }
 
 ?>

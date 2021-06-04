@@ -37,7 +37,7 @@
                                 <td><?php echo $data["username_petugas"] ?></td>
                                 <td><?php echo $data["level_petugas"] ?></td>
                                 <td><a href="#form-edit" data-toggle="modal" onclick="edit('<?php echo $data['id_petugas'] ?>')"><i class="fas fa-pencil-alt"></i></a></td>
-                                <td><a href="#form-hapus" data-toggle="modal" onclick="hapus('<?php echo $data['id_petugas'] ?>')" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
+                                <td><a href="#form-hapus" data-toggle="modal" onclick="hapus('<?php echo $data['id_petugas'] ?>', '<?php echo $data['username_petugas'] ?>')" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             <?php
                         }
@@ -160,6 +160,7 @@
                     <div class="modal-body" id="body-edit">
                         <div class="form-check form-check-inline mb-3 ml-2">
                             <input type="hidden" name="id" id="id">
+                            <input type="hidden" name="username" id="username">
                         </div>
                         Apakah anda yakin ingin menghapus data ?
                     </div>
@@ -193,7 +194,8 @@
             }
         }
 
-        function hapus(id) {  
+        function hapus(id, username) {  
             $("#id").attr("value", id);
+            $("#username").attr("value", username);
         }
     </script>

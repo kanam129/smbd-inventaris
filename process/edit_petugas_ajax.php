@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include("../system/connection.php");
 $id = $_POST["id"];
 
@@ -18,6 +19,13 @@ while($data = mysqli_fetch_array($select)){
 
 ?>
 
+<input type="hidden" name="id_petugas" value="<?php echo $id; ?>">
+
+<div class="form-group">
+    <label for="username_petugas">Username</label>
+    <input type="text"
+    class="form-control" name="username_petugas" id="username_petugas" aria-describedby="usernameHelpText" placeholder="Username" required onblur="checkUsername(this)" autocomplete="off" value="<?php echo $username_petugas; ?>" readonly>
+</div>
 <div class="form-group">
     <label for="nama_petugas">Nama</label>
     <input type="text" class="form-control" name="nama_petugas" id="nama_petugas" aria-describedby="helpId" placeholder="Nama" value="<?php echo $nama_petugas; ?>">
@@ -46,15 +54,6 @@ while($data = mysqli_fetch_array($select)){
 <div class="form-group">
     <label for="alamat_petugas">Alamat</label>
     <textarea class="form-control" name="alamat_petugas" id="alamat_petugas" rows="2"> <?php echo $alamat_petugas; ?></textarea>
-</div>
-<div class="form-group">
-    <label for="username_petugas">Username</label>
-    <input type="text"
-    class="form-control" name="username_petugas" id="username_petugas" aria-describedby="usernameHelpText" placeholder="Username" required onblur="checkUsername(this)" autocomplete="off" value="<?php echo $username_petugas; ?>">
-</div>
-<div class="form-group">
-    <label for="password_petugas">Password</label>
-    <input type="password" class="form-control" name="password_petugas" id="password_petugas" value="<?php echo $password_petugas; ?>">
 </div>
 <div class="form-group">
     <label for="level_petugas">Level</label>

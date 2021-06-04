@@ -26,8 +26,8 @@
                                 <td><?php echo $data["tgl_lahir_anggota"] ?></td>
                                 <td><?php echo $data["no_tlp_anggota"] ?></td>
                                 <td><?php echo $data["alamat_anggota"] ?></td>
-                                <td><a href="#form-edit" data-toggle="modal" onclick="edit(<?php echo $data['nim'] ?>)"><i class="fas fa-pencil-alt"></i></a></td>
-                                <td><a href="#form-hapus" data-toggle="modal" onclick="hapus(<?php echo $data['nim'] ?>)" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
+                                <td><a href="#form-edit" data-toggle="modal" onclick="edit('<?php echo $data['nim'] ?>')"><i class="fas fa-pencil-alt"></i></a></td>
+                                <td><a href="#form-hapus" data-toggle="modal" onclick="hapus('<?php echo $data['nim']; ?>')" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             <?php
                         }
@@ -62,17 +62,30 @@
                     Nama anggota
                     <input type="text" name="nama_anggota" class="form-control mb-3 mt-2" placeholder="Nama Anggota" required>
 
-                    Jenis Kelamin
-                    <input type="text" name="jenis_kelamin_anggota" class="form-control mb-3 mt-2" placeholder="Jenis Kelamin" required>
+                    <div class="w-100 mb-2">
+                        Jenis Kelamin
+                    </div>
+                    <div class="form-check form-check-inline mb-3">
+                        <label class="form-check-label mr-3">
+                            <input class="form-check-input" type="radio" name="jenis_kelamin_anggota" id="jenis_kelamin_anggota" value="L"> Laki-laki
+                        </label>
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="jenis_kelamin_anggota" id="jenis_kelamin_anggota2" value="P"> Perempuan
+                        </label>
+                    </div>
 
-                    Tanggal Lahir
-                    <input type="number" name="tgl_lahir_anggota" class="form-control mb-3 mt-2" placeholder="Tanggal Lahir" min="1" required>
+                    <div class="w-100 mb-2">
+                        Tanggal Lahir
+                    </div>
+                    <input type="date" name="tgl_lahir_anggota" class="form-control mb-3 mt-2" placeholder="Tanggal Lahir" min="1" required>
 
                     No tlp
-                    <input type="number" name="no_tlp_anggota" class="form-control mb-3 mt-2" placeholder="no tlp" min="1"  required>
+                    <input type="tel" name="no_tlp_anggota" class="form-control mb-3 mt-2" placeholder="no tlp" min="1"  required>
 
-                    Alamat
-                    <input type="text" name="alamat_anggota" class="form-control mb-3 mt-2" placeholder="alamat" min="1" required>
+                    <div class="form-group">
+                        <label for="alamat_anggota">Alamat</label>
+                        <textarea class="form-control" name="alamat_anggota" id="alamat_anggota" rows="2"></textarea>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

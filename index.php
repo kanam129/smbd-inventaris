@@ -1,7 +1,7 @@
 <?php
 
-include("system/connection.php");
 session_start();
+include("system/connection.php");
 
 if(!isset($_SESSION["user"])){
     header("location:login.php");
@@ -53,6 +53,9 @@ if(!isset($_GET["page"])){
                 <li class="nav-item <?php if($_GET['page']=='pengembalian'){echo 'active';} ?>">
                     <a class="nav-link <?php if($_GET['page']=='pengembalian'){echo 'nav-active';} ?>" href="index.php?page=pengembalian">Pengembalian</a>
                 </li>
+                <li class="nav-item <?php if($_GET['page']=='anggota'){echo 'active';} ?>">
+                    <a class="nav-link <?php if($_GET['page']=='anggota'){echo 'nav-active';} ?>" href="index.php?page=anggota">Anggota</a>
+                </li>
                 
                 <?php 
                     if($_SESSION["level_petugas"] == "Super Admin"){
@@ -60,12 +63,12 @@ if(!isset($_GET["page"])){
                         <li class="nav-item <?php if($_GET['page']=='petugas'){echo 'active';} ?>">
                             <a class="nav-link <?php if($_GET['page']=='petugas'){echo 'nav-active';} ?>" href="index.php?page=petugas">Petugas</a>
                         </li>
+                        <li class="nav-item <?php if($_GET['page']=='log'){echo 'active';} ?>">
+                            <a class="nav-link <?php if($_GET['page']=='log'){echo 'nav-active';} ?>" href="index.php?page=log">Log</a>
+                        </li>
                         <?php
                     }
                 ?>
-                <li class="nav-item <?php if($_GET['page']=='log'){echo 'active';} ?>">
-                    <a class="nav-link <?php if($_GET['page']=='log'){echo 'nav-active';} ?>" href="index.php?page=log">Log</a>
-                </li>
             </ul>
             <a class="btn btn-light" href="#modal-user" data-toggle="modal" role="button"><i class="fas fa-user mr-1"></i> <?php echo $_SESSION["user"] ?></a>
         </div>

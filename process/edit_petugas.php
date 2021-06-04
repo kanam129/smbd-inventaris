@@ -1,26 +1,35 @@
 <?php
 
-include("../system/connection.php");
 session_start();
+include("../system/connection.php");
 
 if(!isset($_SESSION["user"])){
     header("location:login.php");
 }
 
-$username_pengguna = $_POST["username_pengguna"];
-$password_pengguna = $_POST["password_pengguna"];
-$hak_akses_pengguna = $_POST["hak_akses_pengguna"];
-$nama_pengguna = $_POST["nama_pengguna"];
-$no_tlp_pengguna = $_POST["no_tlp_pengguna"];
-$alamat_pengguna = $_POST["alamat_pengguna"];
+$id_petugas = $_POST["id_petugas"];
+$nama_petugas = $_POST["nama_petugas"];
+$jenis_kelamin_petugas = $_POST["jenis_kelamin_petugas"];
+$tgl_lahir_petugas = $_POST["tgl_lahir_petugas"];
+$no_tlp_petugas = $_POST["no_tlp_petugas"];
+$alamat_petugas = $_POST["alamat_petugas"];
+$level_petugas = $_POST["level_petugas"];
 
-$update = mysqli_query($conn, "update pengguna set password_pengguna='$password_pengguna', hak_akses_pengguna='$hak_akses_pengguna', nama_pengguna='$nama_pengguna', no_tlp_pengguna='$no_tlp_pengguna', alamat_pengguna='$alamat_pengguna' where username_pengguna='$username_pengguna'");
+$update = mysqli_query($conn, "update petugas set 
+    nama_petugas = '$nama_petugas',
+    jenis_kelamin_petugas = '$jenis_kelamin_petugas',
+    tgl_lahir_petugas = '$tgl_lahir_petugas',
+    no_tlp_petugas = '$no_tlp_petugas',
+    alamat_petugas = '$alamat_petugas',
+    level_petugas = '$level_petugas'
+    where id_petugas = $id_petugas
+");
 
 if($update){
     ?>
     <script>
-        alert("Edit data pengguna berhasil");
-        document.location = "../index.php?page=pengguna";
+        alert("Edit data petugas berhasil");
+        document.location = "../index.php?page=petugas";
     </script>
     <?php
 }else{

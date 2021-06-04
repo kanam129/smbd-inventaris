@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include("../system/connection.php");
 $id = $_POST["id"];
 

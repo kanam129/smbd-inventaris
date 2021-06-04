@@ -1,7 +1,7 @@
 <?php
 
-include("../system/connection.php");
 session_start();
+include("../system/connection.php");
 
 if(!isset($_SESSION["user"])){
     header("location:login.php");
