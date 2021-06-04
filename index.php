@@ -66,6 +66,9 @@ if(!isset($_GET["page"])){
                         <li class="nav-item <?php if($_GET['page']=='log'){echo 'active';} ?>">
                             <a class="nav-link <?php if($_GET['page']=='log'){echo 'nav-active';} ?>" href="index.php?page=log">Log</a>
                         </li>
+                        <li class="nav-item <?php if($_GET['page']=='catalog'){echo 'active';} ?>">
+                            <a class="nav-link <?php if($_GET['page']=='catalog'){echo 'nav-active';} ?>" href="index.php?page=catalog">Catalog</a>
+                        </li>
                         <?php
                     }
                 ?>
